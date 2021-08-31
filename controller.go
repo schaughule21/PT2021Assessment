@@ -10,6 +10,7 @@ import (
 
 func registerRoutes() *gin.Engine {
 	r := gin.Default()
+	r.Use(CORSMiddleware())
 	r.POST("/addfactory", func(c *gin.Context) {
 		var factory models.Factory
 		err := c.Bind(&factory)
