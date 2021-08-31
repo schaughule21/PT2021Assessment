@@ -16,6 +16,12 @@ type Factory struct {
 	Pin         int                `bson:"pin"`
 	UName       string             `bson:"uname" validate:"alphanum,required,gte=5,lte=20"`
 	Password    string             `bson:"password" validate:"alphanum,required,gte=8,lte=20"`
-	ConfirmPass string             `bson:"confirm_pass" validate:"alphanum,required,eqfield=Password"`
+	ConfirmPass string             `bson:"confirm_pass" validate:"alphanum,eqfield=Password"`
 	RegiTime    primitive.DateTime `bson:"regitime"`
+}
+
+//temporary login token struct
+type LoginToken struct {
+	ID    string
+	Token string
 }

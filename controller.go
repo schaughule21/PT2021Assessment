@@ -25,5 +25,6 @@ func registerRoutes() *gin.Engine {
 		res := database.GetFactory()
 		c.JSON(200, res)
 	})
+	r.POST("/login", Login)
 	return r
 }

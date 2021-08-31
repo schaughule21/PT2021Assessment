@@ -74,6 +74,17 @@ func GetFactory() []models.Factory {
 	return factory
 }
 
+func CheckValidation(user models.Factory) models.Factory {
+	client, context, cancel, err := CreateConnection("mongodb://localhost:27017/")
+	CheckError(err)
+	defer Close(client, context, cancel)
+	collection := client.Database("SugarFactory").Collection("factory")
+	var res models.Factory
+	err = collection.FindOne(context, bson.D{primitive.E{Key: "uname", Value: user.UName}}).Decode(&res)
+	CheckError(err)
+	return res
+}
+
 func CheckError(er error) {
 	if er != nil {
 		log.Fatal(er)
